@@ -167,12 +167,19 @@ export const comment = (() => {
             return;
         }
 
+        const dietary = document.getElementById('form-dietary');
+        let dietaryValue = dietary ? dietary.value : 'none';
+
         if (!id && name && !session.isAdmin()) {
             name.disabled = true;
         }
 
         if (presence && presence.value != '0') {
             presence.disabled = true;
+        }
+
+        if (dietary) {
+            dietary.disabled = true;
         }
 
         const form = document.getElementById(`form-${id ? `inner-${id}` : 'comment'}`);
@@ -196,7 +203,7 @@ export const comment = (() => {
 
         const response = await request(HTTP_POST, '/api/comment')
             .token(session.getToken())
-            .body(dto.postCommentRequest(id, nameValue, isPresence, form.value))
+            .body(dto.postCommentRequest(id, nameValue, isPresence, form.value, dietaryValue))
             .send(dto.postCommentResponse)
             .then((res) => res, () => null);
 
@@ -211,6 +218,10 @@ export const comment = (() => {
 
         if (presence) {
             presence.disabled = false;
+        }
+
+        if (dietary) {
+            dietary.disabled = false;
         }
 
         btn.restore();
