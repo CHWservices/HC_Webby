@@ -946,20 +946,31 @@
      </div>
      <div class="mb-3">
       <label class="form-label" for="form-email">
-       <i class="fa-solid fa-envelope me-1">
-       </i>
+       <i class="fa-solid fa-envelope me-1"></i>
        Email
       </label>
-      <input class="form-control shadow-sm rounded-4" id="form-email" placeholder="Enter Your Email" type="email"/>
+      <input class="form-control shadow-sm rounded-4" id="form-email" placeholder="Enter Your Email" type="email" required/>
      </div>
-     <button class="btn btn-light shadow rounded-4 mt-4" onclick="guest.open(this)" type="button">
-      <i class="fa-solid fa-envelope-open me-2">
-      </i>
+     <button class="btn btn-light shadow rounded-4 mt-4" id="open-invitation-btn" type="button">
+      <i class="fa-solid fa-envelope-open me-2"></i>
       Open Invitation
      </button>
     </div>
    </div>
   </div>
+
+  <script>
+  // Add this script block to handle the email submission
+  document.getElementById('open-invitation-btn').addEventListener('click', function() {
+    const email = document.getElementById('form-email').value;
+    if (email) {
+      // Call your email API function here
+      guest.open(email);
+    } else {
+      alert('Please enter a valid email address.');
+    }
+  });
+  </script>
   <!-- Theme Button -->
   <button class="btn bg-dark border border-2 btn-sm rounded-circle btn-theme" id="button-theme" onclick="theme.change()" style="display: none;" type="button">
    <i class="fa-solid fa-circle-half-stroke">
