@@ -22,7 +22,7 @@ export const dto = (() => {
         };
     });
 
-    const postCommentResponse = (({ uuid, own, name, presence, comment, created_at }) => {
+    const postCommentResponse = (({ uuid, own, name, presence, comment, created_at, dietary }) => {
         let is_admin = false;
         let comments = [];
         let like = likeCommentResponse();
@@ -33,6 +33,7 @@ export const dto = (() => {
             name,
             presence,
             comment,
+            dietary,
             is_admin,
             created_at,
             comments,
@@ -58,13 +59,14 @@ export const dto = (() => {
         };
     });
 
-    const commentResponse = (({ name, presence, comment, is_admin, created_at }) => {
+    const commentResponse = (({ name, presence, comment, is_admin, created_at, dietary }) => {
         return {
             name,
             presence,
             comment,
             is_admin,
             created_at,
+            dietary,
         };
     });
 
@@ -75,19 +77,21 @@ export const dto = (() => {
         };
     });
 
-    const postCommentRequest = ((id, name, presence, comment) => {
+    const postCommentRequest = ((id, name, presence, comment, dietary) => {
         return {
             id,
             name,
             presence,
             comment,
+            dietary,
         };
     });
 
-    const postSessionRequest = ((email, password) => {
+    const postSessionRequest = ((email, password, allowed_emails) => {
         return {
             email: email,
             password: password,
+            allowed_emails: allowed_emails,
         };
     });
 

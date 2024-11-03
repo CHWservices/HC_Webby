@@ -748,7 +748,7 @@
    </section>
    <!-- Wave Separator -->
    <svg class="color-theme-black" viewbox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg">
-    <path d="M0,96L30,106.7C60,117,120,139,180,154.7C240,171,300,181,360,186.7C420,192,480,192,540,181.3C600,171,660,149,720,154.7C780,160,840,192,900,208C960,224,1020,224,1080,208C1140,192,1200,160,1260,138.7C1320,117,1380,107,1410,101.3L1440,96L1440,0L1410,0C1380,0,1320,0,1260,0C1200,0,1140,0,1080,0C1020,0,960,0,900,0C840,0,780,0,720,0C660,0,600,0,540,0C480,0,420,0,360,0C300,0,240,0,180,0C120,0,60,0,30,0L0,0Z" fill="currentColor" fill-opacity="1">
+    <path d="M0,160L48,144C96,128,192,96,288,106.7C384,117,480,171,576,165.3C672,160,768,96,864,96C960,96,1056,160,1152,154.7C1248,149,1344,75,1392,37.3L1440,0L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z" fill="currentColor" fill-opacity="1">
     </path>
    </svg>
 
@@ -806,6 +806,24 @@
            </option>
            <option value="2">
             Unable to attend
+           </option>
+          </select>
+         </div>
+         <div class="mb-3">
+          <label class="form-label" for="form-dietary">
+           <i class="fa-solid fa-utensils me-1">
+           </i>
+           Dietary Requirements
+          </label>
+          <select class="form-select shadow-sm rounded-4" id="form-dietary">
+           <option selected="" value="none">
+            None
+           </option>
+           <option value="vegetarian">
+            Vegetarian
+           </option>
+           <option value="vegan">
+            Vegan
            </option>
           </select>
          </div>
@@ -926,14 +944,33 @@
      </h2>
      <div data-message="Kepada Yth Bapak/Ibu/Saudara/i" id="guest-name">
      </div>
-     <button class="btn btn-light shadow rounded-4 mt-4" onclick="guest.open(this)" type="button">
-      <i class="fa-solid fa-envelope-open me-2">
-      </i>
+     <div class="mb-3">
+      <label class="form-label" for="form-email">
+       <i class="fa-solid fa-envelope me-1"></i>
+       Email
+      </label>
+      <input class="form-control shadow-sm rounded-4" id="form-email" placeholder="Enter Your Email" type="email" required/>
+     </div>
+     <button class="btn btn-light shadow rounded-4 mt-4" id="open-invitation-btn" type="button">
+      <i class="fa-solid fa-envelope-open me-2"></i>
       Open Invitation
      </button>
     </div>
    </div>
   </div>
+
+  <script>
+  // Add this script block to handle the email submission
+  document.getElementById('open-invitation-btn').addEventListener('click', function() {
+    const email = document.getElementById('form-email').value;
+    if (email) {
+      // Call your email API function here
+      guest.open(email);
+    } else {
+      alert('Please enter a valid email address.');
+    }
+  });
+  </script>
   <!-- Theme Button -->
   <button class="btn bg-dark border border-2 btn-sm rounded-circle btn-theme" id="button-theme" onclick="theme.change()" style="display: none;" type="button">
    <i class="fa-solid fa-circle-half-stroke">

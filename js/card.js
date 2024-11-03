@@ -146,7 +146,8 @@ export const card = (() => {
             <small class="text-${text} m-0 p-0" style="font-size: 0.75rem;">${comment.created_at}</small>
         </div>
         <hr class="text-${text} my-1">
-        <p class="text-${text} mt-0 mb-1 mx-0 p-0" style="white-space: pre-wrap !important; font-size: 0.95rem;" id="content-${comment.uuid}">${convertMarkdownToHTML(util.escapeHtml(comment.comment))}</p>`;
+        <p class="text-${text} mt-0 mb-1 mx-0 p-0" style="white-space: pre-wrap !important; font-size: 0.95rem;" id="content-${comment.uuid}">${convertMarkdownToHTML(util.escapeHtml(comment.comment))}</p>
+        <p class="text-${text} mt-0 mb-1 mx-0 p-0" style="white-space: pre-wrap !important; font-size: 0.95rem;" id="dietary-${comment.uuid}">Dietary: ${util.escapeHtml(comment.dietary)}</p>`;
     };
 
     const renderContent = (comment, is_parent) => {

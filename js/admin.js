@@ -4,7 +4,7 @@ import { storage } from './storage.js';
 import { session } from './session.js';
 import { comment } from './comment.js';
 import { bootstrap } from './bootstrap.js';
-import { request, HTTP_GET, HTTP_PATCH, HTTP_PUT } from './request.js';
+import { request, HTTP_GET, HTTP_PATCH, HTTP_PUT, HTTP_POST, HTTP_DELETE } from './request.js';
 
 export const admin = (() => {
 
@@ -245,6 +245,76 @@ export const admin = (() => {
         bootstrap.Modal.getOrCreateInstance('#loginModal').show();
     };
 
+    const addAllowedEmail = async (button) => {
+        const emailInput = document.getElementById('form-allowed-email');
+        const email = emailInput.value.trim();
+
+        if (email.length === 0) {
+            alert('Email cannot be empty');
+            return;
+        }
+
+        emailInput.disabled = true;
+        const btn = util.disableButton(button);
+
+        const result = await request(HTTP_POST, '/api/allowed-emails')
+            .token(session.getToken())
+            .body({ email })
+            .send(dto.statusResponse)
+            .then((res) => res.data.status, () => false);
+
+        emailInput.disabled = false;
+        btn.restore();
+
+        if (result) {
+            emailInput.value = '';
+            fetchAllowedEmails();
+            alert('Email added successfully');
+        }
+    };
+
+    const removeAllowedEmail = async (button) => {
+        const email = button.getAttribute('data-email');
+
+        if (!confirm(`Are you sure you want to remove ${email}?`)) {
+            return;
+        }
+
+        const btn = util.disableButton(button);
+
+        const result = await request(HTTP_DELETE, `/api/allowed-emails/${encodeURIComponent(email)}`)
+            .token(session.getToken())
+            .send(dto.statusResponse)
+            .then((res) => res.data.status, () => false);
+
+        btn.restore();
+
+        if (result) {
+            fetchAllowedEmails();
+            alert('Email removed successfully');
+        }
+    };
+
+    const fetchAllowedEmails = () => {
+        request(HTTP_GET, '/api/allowed-emails')
+            .token(session.getToken())
+            .send()
+            .then((res) => {
+                const allowedEmailsList = document.getElementById('allowed-emails-list');
+                allowedEmailsList.innerHTML = '';
+
+                res.data.forEach((email) => {
+                    const listItem = document.createElement('li');
+                    listItem.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-center');
+                    listItem.innerHTML = `
+                        <span>${email}</span>
+                        <button class="btn btn-sm btn-danger" data-email="${email}" onclick="admin.removeAllowedEmail(this)">Remove</button>
+                    `;
+                    allowedEmailsList.appendChild(listItem);
+                });
+            });
+    };
+
     const init = () => {
         session.init();
         comment.init();
@@ -268,6 +338,7 @@ export const admin = (() => {
         getUserDetail();
         getStatUser();
         comment.comment();
+        fetchAllowedEmails();
     };
 
     return {
@@ -287,6 +358,8 @@ export const admin = (() => {
         enableButtonName,
         enableButtonPassword,
         buttonNavHome,
-        buttonNavSetting
+        buttonNavSetting,
+        addAllowedEmail,
+        removeAllowedEmail,
     };
 })();
