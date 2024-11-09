@@ -18,8 +18,8 @@
   <meta content="Online Wedding Invitation Website for Holly and Charlie" property="og:title"/>
   <meta content="Online Wedding Invitation Website for Holly and Charlie" property="og:description"/>
   <meta content="invitation, wedding, digital invitation, online invitation, wedding invitation, invitation template, wedding invitation template, online invitation template, wedding invitation github, website template, wedding invitation website template" property="og:keywords"/>
-  <meta content="https://ulems.my.id/assets/images/bg.png" property="og:image"/>
-  <meta content="https://ulems.my.id/assets/images/bg.png" property="og:image:secure_url"/>
+  <meta content="./assets/images/bg.png" property="og:image"/>
+  <meta content="./assets/images/bg.png" property="og:image:secure_url"/>
   <meta content="image/png" property="og:image:type"/>
   <meta content="Online Wedding Invitation Website for Holly and Charlie" property="og:image:alt"/>
   <meta content="website" property="og:type"/>
@@ -355,7 +355,7 @@
    <!-- Wave Separator -->
    <svg class="color-theme-black" viewbox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg">
     <path d="M0,160L48,144C96,128,192,96,288,106.7C384,117,480,171,576,165.3C672,160,768,96,864,96C960,96,1056,160,1152,154.7C1248,149,1344,75,1392,37.3L1440,0L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z" fill="currentColor" fill-opacity="1">
-    </path>6333333333333333333333333333336
+    </path>
    </svg>
    <!-- Wedding Date -->
    <section class="dark-section bg-black" id="wedding-date" style="overflow: hidden;">
@@ -808,24 +808,6 @@
           </select>
          </div>
          <div class="mb-3">
-          <label class="form-label" for="form-dietary">
-           <i class="fa-solid fa-utensils me-1">
-           </i>
-           Dietary Requirements
-          </label>
-          <select class="form-select shadow-sm rounded-4" id="form-dietary">
-           <option selected="" value="none">
-            None
-           </option>
-           <option value="vegetarian">
-            Vegetarian
-           </option>
-           <option value="vegan">
-            Vegan
-           </option>
-          </select>
-         </div>
-         <div class="mb-3">
           <div class="alert alert-info alert-dismissible fade show rounded-4" id="information" role="alert">
            <button aria-label="Close" class="btn-close" data-bs-dismiss="alert" onclick="util.close()" type="button">
            </button>
@@ -932,54 +914,35 @@
    <div class="d-flex justify-content-center align-items-center" style="height: 100vh !important;">
     <div class="text-center">
      <h2 class="zen-tokyo-zoo-regular mb-4" style="font-size: 2.5rem;">
-      The Wedding Of
-     </h2>
-     <div class="img-crop border border-3 border-light shadow mb-4 mx-auto">
-      <img alt="background" src="./assets/images/bg.png"/>
-     </div>
-     <h2 class="zen-tokyo-zoo-regular my-4" style="font-size: 2.5rem;">
-      Charlie &amp; Holly
-     </h2>
-     <div data-message="Kepada Yth Bapak/Ibu/Saudara/i" id="guest-name">
-     </div>
-     <div class="mb-3">
-      <label class="form-label" for="form-email">
-       <i class="fa-solid fa-envelope me-1"></i>
-       Email
-      </label>
-      <input class="form-control shadow-sm rounded-4" id="form-email" placeholder="Enter Your Email" type="email" required/>
-     </div>
-     <button class="btn btn-light shadow rounded-4 mt-4" id="open-invitation-btn" type="button">
-      <i class="fa-solid fa-envelope-open me-2"></i>
-      Open Invitation
-     </button>
+        The Wedding Of
+    </h2>
+    <div class="img-crop border border-3 border-light shadow mb-4 mx-auto">
+     <img alt="background" src="./assets/images/bg.png"/>
     </div>
+    <h2 class="zen-tokyo-zoo-regular my-4" style="font-size: 2.5rem;">
+     Charlie &amp; Holly
+    </h2>
+    <div data-message="Kepada Yth Bapak/Ibu/Saudara/i" id="guest-name">
+    </div>
+    <button class="btn btn-light shadow rounded-4 mt-4" onclick="guest.open(this)" type="button">
+     <i class="fa-solid fa-envelope-open me-2">
+     </i>
+     Open Invitation
+    </button>
    </div>
   </div>
-
-  <script>
-  // Add this script block to handle the email submission
-  document.getElementById('open-invitation-btn').addEventListener('click', function() {
-    const email = document.getElementById('form-email').value;
-    if (email) {
-      // Call your email API function here
-      guest.open(email);
-    } else {
-      alert('Please enter a valid email address.');
-    }
-  });
-  </script>
-  <!-- Theme Button -->
-  <button class="btn bg-dark border border-2 btn-sm rounded-circle btn-theme" id="button-theme" onclick="theme.change()" style="display: none;" type="button">
-   <i class="fa-solid fa-circle-half-stroke">
-   </i>
-  </button>
-  <!-- Audio Button -->
-  <button class="btn bg-dark border border-2 btn-sm rounded-circle btn-music" data-url="./assets/music/sound.mp3" id="button-music" onclick="audio.button(this)" style="display: none;" type="button">
-   <i class="fa-solid fa-circle-pause spin-button">
-   </i>
-  </button>
-  <!-- Loading Page -->
+ </div>
+ <!-- Theme Button -->
+ <button class="btn bg-dark border border-2 btn-sm rounded-circle btn-theme" id="button-theme" onclick="theme.change()" style="display: none;" type="button">
+  <i class="fa-solid fa-circle-half-stroke">
+  </i>
+ </button>
+ <!-- Audio Button -->
+ <button class="btn bg-dark border border-2 btn-sm rounded-circle btn-music" data-url="./assets/music/sound.mp3" id="button-music" onclick="audio.button(this)" style="display: none;" type="button">
+  <i class="fa-solid fa-circle-pause spin-button">
+  </i>
+ </button>
+ <!-- Loading Page -->
   <div class="loading-page bg-black" id="loading" style="opacity: 1;">
    <div class="d-flex justify-content-center align-items-center" style="height: 100vh !important;">
     <div class="w-75 text-center">
